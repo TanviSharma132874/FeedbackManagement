@@ -1,0 +1,54 @@
+@model Feedback
+@{
+    ViewData["Title"] = "Feedback Details";
+}
+
+<h2 class="mb-3">Feedback Details</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.FullName)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.FullName)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Email)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Email)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Phone)</dt>
+            <dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Phone) ? "-" : Model.Phone)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Category)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Category)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Rating)</dt>
+            <dd class="col-sm-9">@await Html.PartialAsync("_RatingStars", Model.Rating ?? 0)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.VisitDate)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.VisitDate)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Subject)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Subject)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Message)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.Message)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.ContactMe)</dt>
+            <dd class="col-sm-9">@(Model.ContactMe ? "Yes" : "No")</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(m => m.SubmittedOn)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(m => m.SubmittedOn)</dd>
+
+            <dt class="col-sm-3">Status</dt>
+            <dd class="col-sm-9">
+                <span class="badge @(Model.IsResolved ? "bg-success" : "bg-warning text-dark")">
+                    @(Model.IsResolved ? "Resolved" : "Pending")
+                </span>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    @Html.ActionLink("Edit", "Edit", "Feedback", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index", "Feedback", new { }, new { @class = "btn btn-outline-secondary ms-2" })
+</div>

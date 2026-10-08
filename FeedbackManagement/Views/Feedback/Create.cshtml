@@ -1,0 +1,27 @@
+@model Feedback
+@{
+    ViewData["Title"] = "Give Feedback";
+}
+
+<h2 class="mb-3">Give Feedback</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Feedback", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "Please correct the following errors:", new { @class = "alert alert-danger" })
+
+            @await Html.PartialAsync("_FeedbackFields", Model)
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                @Html.ActionLink("Cancel", "Index", "Feedback", new { }, new { @class = "btn btn-outline-secondary ms-2" })
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

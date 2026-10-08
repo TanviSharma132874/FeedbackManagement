@@ -1,0 +1,3 @@
+@model int
+
+<span class="rating-stars text-warning" title="@Model out of 5">@(new string('★', Model))@(new string('☆', 5 - Model))</span>

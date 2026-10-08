@@ -1,0 +1,64 @@
+@model Feedback
+
+<div class="row g-3">
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.FullName, new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Enter your full name" })
+        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "name@domain.com" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Phone, new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", type = "tel", maxlength = 10, placeholder = "10-digit mobile number" })
+        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Category, new { @class = "form-label fw-semibold" })
+        @Html.DropDownListFor(m => m.Category, new SelectList(FeedbackCategories.All), "-- Select category --", new { @class = "form-select" })
+        @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.VisitDate, new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(m => m.VisitDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", max = DateTime.Today.ToString("yyyy-MM-dd") })
+        @Html.ValidationMessageFor(m => m.VisitDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Rating, new { @class = "form-label fw-semibold d-block" })
+        @for (int i = 1; i <= 5; i++)
+        {
+            <div class="form-check form-check-inline">
+                @Html.RadioButtonFor(m => m.Rating, i, new { @class = "form-check-input", id = "rating" + i })
+                <label class="form-check-label" for="@("rating" + i)">@i</label>
+            </div>
+        }
+        <div>@Html.ValidationMessageFor(m => m.Rating, "", new { @class = "text-danger" })</div>
+    </div>
+
+    <div class="col-12">
+        @Html.LabelFor(m => m.Subject, new { @class = "form-label fw-semibold" })
+        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Short title for your feedback" })
+        @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-12">
+        @Html.LabelFor(m => m.Message, new { @class = "form-label fw-semibold" })
+        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", rows = 5, placeholder = "Tell us about your experience (minimum 20 characters)" })
+        @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-12">
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.ContactMe, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.ContactMe, new { @class = "form-check-label" })
+        </div>
+    </div>
+</div>

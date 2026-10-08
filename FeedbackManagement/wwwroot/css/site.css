@@ -1,0 +1,27 @@
+/* Validation styles used by the HTML Helpers */
+.field-validation-error {
+    color: #dc3545;
+    font-size: 0.875em;
+}
+
+.input-validation-error {
+    border-color: #dc3545 !important;
+}
+
+.validation-summary-errors ul {
+    margin-bottom: 0;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.stat-card .stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.rating-stars {
+    letter-spacing: 2px;
+    white-space: nowrap;
+}

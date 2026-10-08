@@ -1,0 +1,29 @@
+@model FeedbackListViewModel
+
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Feedback", FormMethod.Get, new { @class = "row g-2 align-items-end" }))
+        {
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Search, "Search", new { @class = "form-label small" })
+                @Html.TextBoxFor(m => m.Search, new { @class = "form-control", placeholder = "Name, subject or text" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Category, "Category", new { @class = "form-label small" })
+                @Html.DropDownListFor(m => m.Category, new SelectList(FeedbackCategories.All), "All categories", new { @class = "form-select" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Rating, "Rating", new { @class = "form-label small" })
+                @Html.DropDownListFor(m => m.Rating, new SelectList(new[] { 1, 2, 3, 4, 5 }), "Any", new { @class = "form-select" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Status, "Status", new { @class = "form-label small" })
+                @Html.DropDownListFor(m => m.Status, new SelectList(new[] { "Pending", "Resolved" }), "Any", new { @class = "form-select" })
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+                @Html.ActionLink("Reset", "Index", "Feedback", new { }, new { @class = "btn btn-outline-secondary" })
+            </div>
+        }
+    </div>
+</div>

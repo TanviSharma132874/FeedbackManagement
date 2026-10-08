@@ -1,0 +1,28 @@
+@model FeedbackStats
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card stat-card shadow-sm h-100"><div class="card-body">
+            <div class="text-muted small">Total Feedback</div>
+            <div class="stat-value">@Model.Total</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card stat-card shadow-sm h-100"><div class="card-body">
+            <div class="text-muted small">Pending</div>
+            <div class="stat-value text-warning">@Model.Pending</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card stat-card shadow-sm h-100"><div class="card-body">
+            <div class="text-muted small">Resolved</div>
+            <div class="stat-value text-success">@Model.Resolved</div>
+        </div></div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card stat-card shadow-sm h-100"><div class="card-body">
+            <div class="text-muted small">Average Rating</div>
+            <div class="stat-value text-primary">@Model.AverageRating.ToString("0.0") / 5</div>
+        </div></div>
+    </div>
+</div>

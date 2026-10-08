@@ -1,0 +1,19 @@
+@model IEnumerable<Feedback>
+
+<div class="row g-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="card-title mb-1">@item.Subject</h6>
+                        @await Html.PartialAsync("_RatingStars", item.Rating ?? 0)
+                    </div>
+                    <div class="text-muted small mb-2">@item.FullName &middot; @item.Category</div>
+                    <p class="card-text small">@item.Message</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

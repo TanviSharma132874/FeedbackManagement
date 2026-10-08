@@ -1,0 +1,51 @@
+@model IEnumerable<Feedback>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info mb-0">No feedback found.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.FullName)</th>
+                    <th>@Html.DisplayNameFor(m => m.Category)</th>
+                    <th>@Html.DisplayNameFor(m => m.Subject)</th>
+                    <th>@Html.DisplayNameFor(m => m.Rating)</th>
+                    <th>@Html.DisplayNameFor(m => m.SubmittedOn)</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Subject)</td>
+                        <td>@await Html.PartialAsync("_RatingStars", item.Rating ?? 0)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SubmittedOn)</td>
+                        <td>
+                            <span class="badge @(item.IsResolved ? "bg-success" : "bg-warning text-dark")">
+                                @(item.IsResolved ? "Resolved" : "Pending")
+                            </span>
+                        </td>
+                        <td class="text-end text-nowrap">
+                            @Html.ActionLink("View", "Details", "Feedback", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-primary" })
+                            @Html.ActionLink("Edit", "Edit", "Feedback", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+                            @Html.ActionLink("Delete", "Delete", "Feedback", new { id = item.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+                            @using (Html.BeginForm("ToggleResolved", "Feedback", new { id = item.Id }, FormMethod.Post, null, new { @class = "d-inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-success">@(item.IsResolved ? "Reopen" : "Resolve")</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
